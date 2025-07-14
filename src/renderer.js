@@ -10,7 +10,7 @@ document.getElementById('btn-settings')
 
   try {
     // Example query: fetch now() from MySQL
-    const rows = await window.db.query('SELECT NOW() AS ts');
+    const rows = await window.db.query('SHOW TABLES');
     out.textContent = JSON.stringify(rows, null, 2);
   } catch (err) {
     out.textContent = 'Error:\n' + err.message;

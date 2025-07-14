@@ -8,6 +8,25 @@ const { createSettingsWindow } = require('./settings-window');
 let mainWindow;
 let pool;
 
+if (process.env.NODE_ENV !== 'production') {
+  // point at the top of the .webpack folder, not src/
+  const buildPath = path.join(__dirname, '..', '.webpack');
+
+  require('electron-reload')(buildPath, {
+    // optional: point to the real electron binary
+    electron: path.join(
+      __dirname, '..', 'node_modules', 'electron', 'dist',
+      process.platform === 'win32' ? 'electron.exe' : 'electron'
+    ),
+    // These help avoid double-reloads while files are still writing:
+    awaitWriteFinish: {
+      stabilityThreshold: 200,
+      pollInterval: 100
+    },
+    // If you want only certain extensions watched:
+    // electronReload(buildPath, { ... , extensions: ['js','html','css'] })
+  });
+}
 function initPool() {
   const cfg = store.get('dbConfig');
   if (
@@ -48,19 +67,7 @@ app.whenReady().then(() => {
         createSettingsWindow(mainWindow);
     });
 
-  Menu.setApplicationMenu(Menu.buildFromTemplate([
-    {
-      label: '⚙️',
-      submenu: [
-        {
-          label: 'DB Settings…',
-          click: () => createSettingsWindow(mainWindow),
-        },
-        { role: 'reload' },
-        { role: 'quit' },
-      ]
-    }
-  ]));
+  Menu.setApplicationMenu(null);
 
   createWindow();
 
@@ -80,6 +87,10 @@ ipcMain.handle('get-db-config', () => {
 ipcMain.handle('set-db-config', (_e, cfg) => {
   store.set('dbConfig', cfg);
   initPool();
+  if(mainWindow && !mainWindow.isDestroyed()) {
+      mainWindow.reload();
+  }
+
   return cfg;
 });
 

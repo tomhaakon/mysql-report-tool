@@ -1,3 +1,6 @@
+document.getElementById('btn-close').addEventListener('click', () => {
+    window.close();
+});
 (async () => {
   const form = document.getElementById('cfgForm');
   // load existing:
@@ -15,7 +18,8 @@
       database: form.database.value,
     };
     await window.settings.setAll(data);
-    alert('Saved! Close this window and use “Reload” to apply.');
+    window.close();
+//    alert('Saved! Close this window and use “Reload” to apply.');
   });
 })();
 
