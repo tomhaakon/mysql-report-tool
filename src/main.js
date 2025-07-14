@@ -8,6 +8,7 @@ const { createSettingsWindow } = require('./settings-window');
 let mainWindow;
 let pool;
 
+
 if (process.env.NODE_ENV !== 'production') {
   // point at the top of the .webpack folder, not src/
   const buildPath = path.join(__dirname, '..', '.webpack');

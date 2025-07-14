@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"><title>DB Settings</title></head>
-<body>
-  <h2>MySQL Connection</h2>
-  <form id="cfgForm">
-    <label>Host:     <input name="host"     /></label><br/>
-    <label>User:     <input name="user"     /></label><br/>
-    <label>Password: <input name="password" type="password" /></label><br/>
-    <label>Database: <input name="database" /></label><br/><br/>
-    <button type="submit">Save</button>
-  </form>
-  <button id="btn-close">Close</button>
-  <script src="settings.js"></script>
+<body class="bg-light">
+  <div class="container py-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title mb-4">MySQL Connection</h2>
+        <form id="cfgForm">
+          <div class="mb-3">
+            <label for="host" class="form-label">Host</label>
+            <input
+              type="text"
+              class="form-control"
+              id="host"
+              name="host"
+              placeholder="e.g. localhost"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="user" class="form-label">User</label>
+            <input
+              type="text"
+              class="form-control"
+              id="user"
+              name="user"
+              placeholder="e.g. root"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="database" class="form-label">Database</label>
+            <input
+              type="text"
+              class="form-control"
+              id="database"
+              name="database"
+              placeholder="e.g. mydb"
+            />
+          </div>
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">
+              Save
+            </button>
+            <button type="button" id="btn-close" class="btn btn-secondary">
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
 
