@@ -1,6 +1,5 @@
 // renderer.js
 console.log("renderer loaded");
-console.log("renderer loaded");
 
 // 1) Wire up the Settings button
 document.getElementById('btn-settings')

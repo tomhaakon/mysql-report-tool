@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Dev",
+      "type": "npm",
+      "script": "dev",            // this matches your "dev" script in package.json
+      "group": {
+        "kind": "build",
+        "isDefault": true        // makes it your default Build Task (⇧⌘B / Ctrl+Shift+B)
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []        // no problems parsing
+    }
+  ]
+}

@@ -28,6 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
     // electronReload(buildPath, { ... , extensions: ['js','html','css'] })
   });
 }
+
 function initPool() {
   const cfg = store.get('dbConfig');
   if (
@@ -47,7 +48,7 @@ function initPool() {
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 800,
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -57,7 +58,7 @@ function createWindow() {
   });
   mainWindow.setMenu(null);
   mainWindow.loadFile('public/index.html');
-  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
 }
 
 app.whenReady().then(() => {
@@ -85,6 +86,7 @@ app.on('window-all-closed', () => {
 ipcMain.handle('get-db-config', () => {
   return store.get('dbConfig');
 });
+
 ipcMain.handle('set-db-config', (_e, cfg) => {
   store.set('dbConfig', cfg);
   initPool();
@@ -97,7 +99,7 @@ ipcMain.handle('set-db-config', (_e, cfg) => {
 
 // IPC: query
 ipcMain.handle('db-query', async (_evt, sql, params=[]) => {
-  if (!pool) throw new Error('DB not configured – please open Settings first.');
+  if (!pool) throw new Error('DB not configured - please open Settings first.');
   const [rows] = await pool.query(sql, params);
   return rows;
 }); 

@@ -1,7 +1,9 @@
 document.getElementById('btn-close').addEventListener('click', () => {
     window.close();
+    console.log("close-btn clicke");
 });
 (async () => {
+  console.log("settings.js loaded")
   const form = document.getElementById('cfgForm');
   // load existing:
   const cfg = await window.settings.getAll();
@@ -19,6 +21,7 @@ document.getElementById('btn-close').addEventListener('click', () => {
     };
     await window.settings.setAll(data);
     window.close();
+    console.log("closing window");
 //    alert('Saved! Close this window and use “Reload” to apply.');
   });
 })();
