@@ -16,7 +16,7 @@ async function loadTables() {
   try {
     const rows = await window.db.query('SHOW TABLES');
     if (!rows.length) {
-      tableSelect.innerHTML = '<option>No tables found</option>';
+      tableSelect.innerHTML = '<option disabled>No tables found</option>';
       return;
     }
     // The column name is dynamic, e.g. "Tables_in_mydb"

@@ -9,26 +9,6 @@ let mainWindow;
 let pool;
 
 
-if (process.env.NODE_ENV !== 'production') {
-  // point at the top of the .webpack folder, not src/
-  const buildPath = path.join(__dirname, '..', '.webpack');
-
-  require('electron-reload')(buildPath, {
-    // optional: point to the real electron binary
-    electron: path.join(
-      __dirname, '..', 'node_modules', 'electron', 'dist',
-      process.platform === 'win32' ? 'electron.exe' : 'electron'
-    ),
-    // These help avoid double-reloads while files are still writing:
-    awaitWriteFinish: {
-      stabilityThreshold: 200,
-      pollInterval: 100
-    },
-    // If you want only certain extensions watched:
-    // electronReload(buildPath, { ... , extensions: ['js','html','css'] })
-  });
-}
-
 function initPool() {
   const cfg = store.get('dbConfig');
   if (
@@ -42,6 +22,7 @@ function initPool() {
     });
   } else {
     pool = null;
+    console.error("dbconfig is empty or wrong")
   }
 }
 
